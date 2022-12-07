@@ -1,8 +1,8 @@
-email = '113002122022@mail.ru'
+email = '2390712@mail.ru'
 first_name = 'mary'
 last_name = 'bilaya'
-password = '11111'
-new_password = '22222'
+password = '111'
+new_password = '222'
 
 motivation_note = 'Никогда не сдавайся. ' \
                   'Не откладывай на завтра то, что можно сделать сегодня. ' \

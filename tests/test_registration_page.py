@@ -1,10 +1,15 @@
 from pages.registration_page import RegistrationPage
 from pages.home_page import HomePage
 import settings
+import pytest
+import allure
 from time import sleep
 
 
-def test_with_correct_registration_data(driver):  # check
+@allure.severity(allure.severity_level.CRITICAL)
+@allure.feature('Registration')
+@pytest.mark.registration
+def test_with_correct_registration_data(driver):
     reg_page = RegistrationPage(driver)
     reg_page.open_registration_page()
     reg_page.enter_correct_registration_data(email=settings.email,
@@ -16,7 +21,9 @@ def test_with_correct_registration_data(driver):  # check
     assert home_page.check_that_username_is_displayed_in_the_welcome_block
 
 
-def test_alert_message_after_registration_with_the_same_email(driver):  # check
+@allure.feature('Registration')
+@pytest.mark.registration
+def test_alert_message_after_registration_with_the_same_email(driver):
     reg_page = RegistrationPage(driver)
     reg_page.open_registration_page()
     reg_page.enter_correct_registration_data(email=settings.email,

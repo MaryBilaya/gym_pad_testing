@@ -11,6 +11,7 @@ class BasePage:
         self.profile_settings_url = 'https://www.gympad.ru/settings'
         self.notes_url = 'https://www.gympad.ru/notes'
         self.exercise_url = 'https://www.gympad.ru/exercises'
+        self.body_param_url = 'https://www.gympad.ru/bodyparams'
 
     def find_element(self, args: tuple):
         by_name, by_val = args
@@ -21,7 +22,7 @@ class BasePage:
         return self.driver.find_elements(by_name, by_val)
 
     def scroll_the_page_to_the_bottom(self):
-        return self.driver.execute_script("window.scrollTo(0,document.body.scrollHeight);")
+        return self.driver.execute_script("window.scrollTo(0,document.body.scrollHeight+50);")
 
     def scroll_the_page_to_the_middle(self):
         return self.driver.execute_script("window.scrollTo(0,document.body.scrollHeight/2);")

@@ -1,5 +1,6 @@
 import pytest
 import settings
+import os
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
@@ -16,9 +17,9 @@ all_fields = (By.CLASS_NAME, 'form-control')
 def driver():
     options = Options()
     options.add_argument('start-maximized')
-    options.add_argument(r'user-data-dir=C:\Users\Masha\PycharmProjects\gym_pad_testing\info_session')
+    file_path = os.path.join(os.path.dirname(__file__), 'info_session')
+    options.add_argument(f'user-data-dir={file_path}')
     chrome_driver = webdriver.Chrome(ChromeDriverManager().install(), options=options)
-    # chrome_driver.maximize_window()
     chrome_driver.implicitly_wait(10)
     yield chrome_driver
     chrome_driver.quit()
@@ -36,6 +37,21 @@ def login(driver):
         password_field.send_keys(settings.password)
         password_field.send_keys(Keys.ENTER)
 
+
+# @pytest.fixture(scope='function')
+# def login(driver):
+#     driver.get('https://www.gympad.ru/')
+#     if driver.find_element(By.XPATH, '//a[@class="btn" and @style="font-size: 12px"]').is_displayed():
+#         login_btn = driver.find_element(By.XPATH, '//a[@class="btn" and @style="font-size: 12px"]')
+#         login_btn.click()
+#         email_field = driver.find_elements(By.CLASS_NAME, 'form-control')[0]
+#         email_field.send_keys(settings.email)
+#         password_field = driver.find_elements(By.CLASS_NAME, 'form-control')[1]
+#         password_field.send_keys(settings.password)
+#         password_field.send_keys(Keys.ENTER)
+#     else:
+#         welcome_phrase = driver.find_element(By.CSS_SELECTOR, 'span[class="hidden-xs"]').text
+#         welcome_phrase == settings.first_name
 
 
 

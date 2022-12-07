@@ -1,10 +1,14 @@
 import settings
-from time import sleep
+import pytest
+import allure
 from pages.login_page import LoginPage
 from pages.home_page import HomePage
 
 
-def test_enter_correct_login_data(driver):  # check
+@allure.severity(allure.severity_level.CRITICAL)
+@allure.feature('Login')
+@pytest.mark.login
+def test_enter_correct_login_data(driver):
     login_page = LoginPage(driver)
     login_page.open_login_page()
     assert login_page.check_that_remember_me_box_is_selected()
@@ -13,7 +17,8 @@ def test_enter_correct_login_data(driver):  # check
     assert home_page.check_that_username_is_displayed_in_the_welcome_block
 
 
-def test_login_with_incorrect_password(driver):  # check
+@pytest.mark.login
+def test_login_with_incorrect_password(driver):
     login_page = LoginPage(driver)
     login_page.open_login_page()
     assert login_page.check_that_remember_me_box_is_selected()
@@ -21,7 +26,8 @@ def test_login_with_incorrect_password(driver):  # check
     assert login_page.check_alert_message_after_login_with_incorrect_password()
 
 
-def test_login_with_incorrect_email(driver):  # check
+@pytest.mark.login
+def test_login_with_incorrect_email(driver):
     login_page = LoginPage(driver)
     login_page.open_login_page()
     assert login_page.check_that_remember_me_box_is_selected()
@@ -29,9 +35,21 @@ def test_login_with_incorrect_email(driver):  # check
     login_page.check_alert_message_after_login_with_incorrect_email()
 
 
-def test_forget_password_link_is_present_on_the_page(driver):  # check
+@pytest.mark.login
+def test_forget_password_link_presents_on_the_page(driver):
     login_page = LoginPage(driver)
     login_page.open_login_page()
-    assert login_page.check_that_forget_password_link_is_present_on_the_login_page()
+    assert login_page.check_that_forget_password_link_presents_on_the_login_page()
+
+
+@pytest.mark.enter_with_a_new_password
+# @pytest.mark.skip('Run only at the end of testing')
+def test_try_to_enter_with_a_new_password(driver):
+    login_page = LoginPage(driver)
+    login_page.open_login_page()
+    assert login_page.check_that_remember_me_box_is_selected()
+    login_page.enter_login_data(email=settings.email, password=settings.new_password)
+    home_page = HomePage(driver)
+    assert home_page.check_that_username_is_displayed_in_the_welcome_block
 
 
