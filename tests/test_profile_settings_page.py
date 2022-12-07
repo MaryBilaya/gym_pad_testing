@@ -36,6 +36,7 @@ def test_change_incorrect_password(driver, login):
     assert profile_settings_page.check_pop_up_message_that_password_was_not_saved()
 
 
+@allure.feature('Profile_settings')
 @pytest.mark.change_existing_password
 # @pytest.mark.skip('Run only at the end of testing')
 def test_change_existing_password(driver, login):

@@ -3,8 +3,8 @@ import allure
 import pytest
 
 
-@allure.feature('Bodyparams')
-@pytest.mark.bodyparams
+@allure.feature('Body_parameters')
+@pytest.mark.body_parameters
 def test_add_weight_param_2_december(driver, login):
     body_param = BodyParam(driver)
     body_param.open_body_param_page()

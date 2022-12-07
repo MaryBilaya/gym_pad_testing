@@ -15,3 +15,5 @@ edit_font_to_bold_motivation = (By.TAG_NAME, 'strong')
 italic_font_button = (By.CSS_SELECTOR, 'a[title="Наклонный"]')
 edit_font_to_italic_motivation = (By.TAG_NAME, 'em')
 list_of_added_notes = (By.CSS_SELECTOR, 'div[class="noteItem"]')
+to_the_notes_button = (By.CSS_SELECTOR, 'a[class="back"]')
+

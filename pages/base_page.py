@@ -22,7 +22,7 @@ class BasePage:
         return self.driver.find_elements(by_name, by_val)
 
     def scroll_the_page_to_the_bottom(self):
-        return self.driver.execute_script("window.scrollTo(0,document.body.scrollHeight+50);")
+        return self.driver.execute_script("window.scrollTo(0,document.body.scrollHeight);")
 
     def scroll_the_page_to_the_middle(self):
         return self.driver.execute_script("window.scrollTo(0,document.body.scrollHeight/2);")

@@ -2,6 +2,7 @@ import pytest
 import settings
 import os
 from selenium import webdriver
+from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
@@ -28,7 +29,7 @@ def driver():
 @pytest.fixture(scope='function')
 def login(driver):
     driver.get('https://www.gympad.ru/')
-    if driver.find_element(By.CSS_SELECTOR, 'span[class="hidden-xs"]').text != settings.first_name:
+    try:
         login_btn = driver.find_element(By.XPATH, '//a[@class="btn" and @style="font-size: 12px"]')
         login_btn.click()
         email_field = driver.find_elements(By.CLASS_NAME, 'form-control')[0]
@@ -36,22 +37,10 @@ def login(driver):
         password_field = driver.find_elements(By.CLASS_NAME, 'form-control')[1]
         password_field.send_keys(settings.password)
         password_field.send_keys(Keys.ENTER)
+    except NoSuchElementException:
+        return False
+    return True
 
-
-# @pytest.fixture(scope='function')
-# def login(driver):
-#     driver.get('https://www.gympad.ru/')
-#     if driver.find_element(By.XPATH, '//a[@class="btn" and @style="font-size: 12px"]').is_displayed():
-#         login_btn = driver.find_element(By.XPATH, '//a[@class="btn" and @style="font-size: 12px"]')
-#         login_btn.click()
-#         email_field = driver.find_elements(By.CLASS_NAME, 'form-control')[0]
-#         email_field.send_keys(settings.email)
-#         password_field = driver.find_elements(By.CLASS_NAME, 'form-control')[1]
-#         password_field.send_keys(settings.password)
-#         password_field.send_keys(Keys.ENTER)
-#     else:
-#         welcome_phrase = driver.find_element(By.CSS_SELECTOR, 'span[class="hidden-xs"]').text
-#         welcome_phrase == settings.first_name
 
 
 

@@ -38,10 +38,11 @@ class NotesPage(BasePage):
         delete_btn = self.find_element(npl.delete_note_content).click()
         confirm_deletion = self.find_element(npl.yes_delete_button).click()
 
+    def check_that_to_the_notes_button_is_displayed(self):
+        return self.find_element(npl.to_the_notes_button).is_displayed()
+
     def check_that_a_motivation_note_was_deleted(self):
-        # display_field_text = self.find_element(npl.note_display_field).text
-        # return 'У вас нет личных заметок' in display_field_text
-        pass
+        return self.find_element(npl.add_notes_button).is_displayed()
 
     def cancel_deleting_a_motivation_note(self):
         delete_btn = self.find_element(npl.delete_note_content).click()
