@@ -1,7 +1,8 @@
 from pages.base_page import BasePage
 from selenium.webdriver.common.action_chains import ActionChains
+from selenium.webdriver.support.wait import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 from pages.locators import food_diary_page_locators as fdpl
-from time import sleep
 
 
 class FoodDiary(BasePage):
@@ -19,13 +20,12 @@ class FoodDiary(BasePage):
 
     def fill_in_a_food_diary(self, product, choice, weight):
         self.find_element(fdpl.calendar_right_btn).click()
-        sleep(3)  # for demonstration purposes
+        wait = WebDriverWait(self.driver, 20)
+        wait.until(EC.text_to_be_present_in_element(fdpl.month_name, 'декабрь 2022'))
         december_2 = self.find_element(fdpl.nutrition_2_december).click()
-        sleep(3)  # for demonstration purposes
         product_name_field = self.find_element(fdpl.food_name_field).send_keys(product)
         product_list = self.find_elements(fdpl.list_of_suggested_products)
         ActionChains(self.driver).move_to_element(product_list[choice]).click().perform()
-        sleep(3)  # for demonstration purposes
         self.find_element(fdpl.weight_field).send_keys(weight)
         self.scroll_the_page_to_the_middle()
         self.find_element(fdpl.add_product).click()

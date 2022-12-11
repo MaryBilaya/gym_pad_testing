@@ -1,6 +1,5 @@
 from pages.base_page import BasePage
 from pages.locators import login_page_locators as lpl
-from time import sleep
 
 
 class LoginPage(BasePage):
@@ -18,7 +17,6 @@ class LoginPage(BasePage):
     def enter_login_data(self, email, password):
         self.find_elements(lpl.all_login_fields)[0].send_keys(email)
         self.find_elements(lpl.all_login_fields)[1].send_keys(password)
-        sleep(3)    # for demonstration purposes
         self.find_element(lpl.login_button).click()
 
     def check_alert_message_after_login_with_incorrect_password(self):
@@ -38,7 +36,6 @@ class LoginPage(BasePage):
     def try_to_enter_with_a_new_password(self, email, new_password):
         self.find_elements(lpl.all_login_fields)[0].send_keys(email)
         self.find_elements(lpl.all_login_fields)[1].send_keys(new_password)
-        sleep(3)    # for demonstration purposes
         self.find_element(lpl.login_button).click()
 
 

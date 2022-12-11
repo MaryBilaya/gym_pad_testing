@@ -18,6 +18,7 @@ all_fields = (By.CLASS_NAME, 'form-control')
 def driver():
     options = Options()
     options.add_argument('start-maximized')
+    options.add_argument('--headless')
     file_path = os.path.join(os.path.dirname(__file__), 'info_session')
     options.add_argument(f'user-data-dir={file_path}')
     chrome_driver = webdriver.Chrome(ChromeDriverManager().install(), options=options)

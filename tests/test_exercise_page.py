@@ -1,7 +1,6 @@
 from pages.exercise_page import ExercisePage
 import pytest
 import allure
-from time import sleep
 
 
 @allure.feature('Exercises')
@@ -48,7 +47,6 @@ def test_setting_a_personal_exercise(driver, login):
     exercise_page = ExercisePage(driver)
     exercise_page.open_an_exercise_page()
     exercise_page.add_a_personal_exercise(personal_ex='HIIT')
-    sleep(3)  # for demonstration purposes
     exercise_page.setting_a_personal_exercise(type_of_ex='Кардио (мин)')
     assert exercise_page.check_pop_up_message_that_a_personal_exercise_was_saved()
 
@@ -59,7 +57,6 @@ def test_delete_a_personal_exercise(driver, login):
     exercise_page = ExercisePage(driver)
     exercise_page.open_an_exercise_page()
     exercise_page.add_a_personal_exercise(personal_ex='HIIT')
-    sleep(3)  # for demonstration purposes
     exercise_page.delete_a_personal_exercise()
     assert exercise_page.check_that_a_personal_exercise_was_deleted()
 
@@ -70,9 +67,7 @@ def test_cancel_deletion_of_a_personal_exercise(driver, login):
     exercise_page = ExercisePage(driver)
     exercise_page.open_an_exercise_page()
     exercise_page.add_a_personal_exercise(personal_ex='HIIT')
-    sleep(3)  # for demonstration purposes
     exercise_page.cancel_deletion_of_a_personal_exercise()
-    sleep(3)  # for demonstration purposes
     assert exercise_page.check_that_a_personal_exercise_still_displayed()
 
 

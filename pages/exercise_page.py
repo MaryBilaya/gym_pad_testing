@@ -1,6 +1,5 @@
 from pages.base_page import BasePage
 from pages.locators import exercise_page_locators as epl
-from time import sleep
 from selenium.webdriver.support.ui import Select
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
@@ -24,24 +23,20 @@ class ExercisePage(BasePage):
         press_btn = catalog_of_exercises[8].click()
         self.scroll_the_page_to_the_middle()
         ex = self.find_element(epl.press_ex1).click()
-        sleep(3)  # for demonstration purposes
+        wait = WebDriverWait(self.driver, 20)
+        wait.until(EC.presence_of_element_located(epl.press_description))
 
     def check_that_exercise_description_is_displayed(self):
         return self.find_element(epl.press_description).is_displayed()
 
     def open_statistics_of_exercise(self):
-        statistics_btn = self.find_elements(epl.description_statistics_btn)
-        statistics_btn[1].click()
-        sleep(3)  # for demonstration purposes
+        statistics_btn = self.find_element(epl.description_statistics_btn).click()
 
     def check_that_statistics_info_is_displayed(self):
-        info = self.find_element(epl.info_statistics)
-        info_text = info.get_attribute('innerText')
-        return 'В дневнике не найдено ни одной записанной тренировки с данным упражнением.' in info_text
+        return self.find_element(epl.info_statistics).is_displayed()
 
     def open_history_of_exercise(self):
         history_btn = self.find_element(epl.description_history_btn).click()
-        sleep(3)  # for demonstration purposes
 
     def check_that_history_info_is_displayed(self):
         info = self.find_element(epl.info_history)
@@ -73,7 +68,6 @@ class ExercisePage(BasePage):
     def delete_a_personal_exercise(self):
         delete_btn = self.find_element(epl.delete_exercise).click()
         self.find_element(epl.yes_delete_exercise).click()
-        sleep(3)  # for demonstration purposes
 
     def check_that_a_personal_exercise_was_deleted(self):
         wait = WebDriverWait(self.driver, 10)
@@ -83,7 +77,6 @@ class ExercisePage(BasePage):
 
     def cancel_deletion_of_a_personal_exercise(self):
         delete_btn = self.find_element(epl.delete_exercise).click()
-        sleep(3)  # for demonstration purposes
         self.find_element(epl.no_delete_exercise).click()
 
     def check_that_a_personal_exercise_still_displayed(self):
@@ -92,10 +85,11 @@ class ExercisePage(BasePage):
     def make_a_positive_search_of_exercise(self):
         self.find_element(epl.search_button).click()
         self.find_element(epl.search_exercise_field).send_keys('Приседания')
-        sleep(3)  # for demonstration purposes
+        wait = WebDriverWait(self.driver, 20)
+        wait.until(EC.visibility_of_element_located(epl.positive_search_result))
 
     def check_positive_search_result(self):
-        result_of_search = self.find_element(epl.search_result)
+        result_of_search = self.find_element(epl.positive_search_result)
         text_of_search_result = result_of_search.get_attribute('innerText')
         split_text = text_of_search_result.split('\n')
         for exercise in split_text:
@@ -105,10 +99,11 @@ class ExercisePage(BasePage):
     def make_a_negative_search_of_exercise(self):
         self.find_element(epl.search_button).click()
         self.find_element(epl.search_exercise_field).send_keys('ghbctlfybz')
-        sleep(3)  # for demonstration purposes
+        wait = WebDriverWait(self.driver, 20)
+        wait.until(EC.visibility_of_element_located(epl.negative_search_result))
 
     def check_negative_search_result_message(self):
-        result_of_search = self.find_element(epl.search_result)
+        result_of_search = self.find_element(epl.negative_search_result)
         text_of_search_result = result_of_search.get_attribute('innerText')
         return 'Упражнение не найдено' in text_of_search_result
 

@@ -2,7 +2,6 @@ from pages.base_page import BasePage
 from pages.locators import notes_page_locators as npl
 from selenium.webdriver.common.keys import Keys
 import settings
-from time import sleep
 
 
 class NotesPage(BasePage):
@@ -62,7 +61,6 @@ class NotesPage(BasePage):
     def change_font_to_bold_of_motivation_note_text(self):
         self.find_element(npl.note_content_field).send_keys(Keys.CONTROL + 'a')
         self.find_element(npl.bold_font_button).click()
-        sleep(3)  # for demonstration purposes
         save_btn = self.find_element(npl.note_save_button).click()
 
     def check_that_font_of_motivation_note_has_become_bold(self):
@@ -73,7 +71,6 @@ class NotesPage(BasePage):
     def change_font_to_italic_of_motivation_note_text(self):
         self.find_element(npl.note_content_field).send_keys(Keys.CONTROL + 'a')
         self.find_element(npl.italic_font_button).click()
-        sleep(3)  # for demonstration purposes
         save_btn = self.find_element(npl.note_save_button).click()
 
     def check_that_font_of_motivation_note_has_become_italic(self):

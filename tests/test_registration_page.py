@@ -3,7 +3,6 @@ from pages.home_page import HomePage
 import settings
 import pytest
 import allure
-from time import sleep
 
 
 @allure.severity(allure.severity_level.CRITICAL)
@@ -16,7 +15,6 @@ def test_with_correct_registration_data(driver):
                                              first_name=settings.first_name,
                                              password=settings.password,
                                              last_name=settings.last_name)
-    sleep(3)    # for demonstration purposes
     home_page = HomePage(driver)
     assert home_page.check_that_username_is_displayed_in_the_welcome_block
 
@@ -30,6 +28,5 @@ def test_alert_message_after_registration_with_the_same_email(driver):
                                              first_name=settings.first_name,
                                              password=settings.password,
                                              last_name=settings.last_name)
-    sleep(3)    # for demonstration purposes
     assert reg_page.check_alert_message_after_registration_with_the_same_email()
 

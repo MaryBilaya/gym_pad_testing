@@ -5,7 +5,6 @@ from pages.food_diary_page import FoodDiary
 from pages.exercise_page import ExercisePage
 import pytest
 import allure
-from time import sleep
 
 
 @allure.feature('Registration')
@@ -34,7 +33,6 @@ def test_all_days_of_the_month_workout_are_displayed(driver, login):
     home_page = HomePage(driver)
     home_page.open_home_page()
     home_page.show_all_days_of_the_month_workout()
-    sleep(3)    # for demonstration purposes
     assert home_page.check_that_all_dates_of_the_month_are_displayed()
 
 
@@ -81,8 +79,8 @@ def test_add_an_exercise_approach(driver, login):
 
 
 @allure.feature('Home')
-@pytest.mark.home  # the test is unstable
-def test_add_a_comment_to_the_exercise(driver, login):
+@pytest.mark.home
+def test_add_a_comment_to_the_exercise(driver, login):  # the test is unstable
     home_page = HomePage(driver)
     with allure.step('Open home page'):
         home_page.open_home_page()
@@ -122,7 +120,6 @@ def test_go_to_the_food_diary_page(driver, login):
     home_page = HomePage(driver)
     home_page.open_home_page()
     home_page.go_to_the_food_diary_page()
-    sleep(3)    # for demonstration purposes
     food_diary = FoodDiary(driver)
     assert food_diary.check_food_diary_page_title
 
@@ -162,6 +159,7 @@ def test_profile_dropdown_exit(driver, login):
     home_page.open_home_page()
     home_page.profile_dropdown_exit()
     assert home_page.check_that_login_button_is_displayed()
+
 
 
 

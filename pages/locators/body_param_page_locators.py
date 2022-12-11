@@ -7,3 +7,4 @@ parameter_value_fields = (By.CSS_SELECTOR, 'input[placeholder="Значение"
 parameter_record_button = (By.CSS_SELECTOR, 'button[class="btn btn-orange submitParam"]')
 displayed_parameter_tables = (By.CSS_SELECTOR, 'div[class="paramTable"]')
 pop_up_message = (By.CSS_SELECTOR, 'div[class="sticky-queue top-right"]')
+

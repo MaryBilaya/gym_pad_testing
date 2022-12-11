@@ -4,7 +4,6 @@ import settings
 from pages.base_page import BasePage
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from time import sleep
 
 
 class HomePage(BasePage):
@@ -30,32 +29,34 @@ class HomePage(BasePage):
         self.find_element(hpl.show_only_active_days_box).click()
 
     def check_that_all_dates_of_the_month_are_displayed(self):
-        return self.find_element(hpl.all_days_of_the_month_block).is_displayed()
+        wait = WebDriverWait(self.driver, 20)
+        wait.until(EC.visibility_of_element_located(hpl.all_days_of_the_month_block))
+        return True
 
     def open_the_block_of_exercises(self):
         record_btn = self.find_elements(hpl.rec_workout_2_december)
         record_btn[1].click()
         plus_btn = self.find_element(hpl.plus_workout_in_december).click()
-        sleep(3)  # for demonstration purposes
+        wait = WebDriverWait(self.driver, 20)
+        wait.until(EC.visibility_of_element_located(hpl.exercise_selection_window))
 
     def check_that_the_window_of_exercises_was_opened(self):
         return self.find_element(hpl.exercise_selection_window).is_displayed()
 
     def adding_an_exercise_to_the_workout(self):
         self.scroll_the_page_to_the_bottom()
-        sleep(3)  # for demonstration purposes
         list_of_exercises = self.find_elements(hpl.list_of_exercises_in_the_selection_window)
         biceps_btn = list_of_exercises[2].click()
-        sleep(3)  # for demonstration purposes
-        wait = WebDriverWait(self.driver, 10)
+        wait = WebDriverWait(self.driver, 20)
         wait.until(EC.text_to_be_present_in_element(hpl.biceps_ex, 'Сгибание рук со штангой'))
         self.find_element(hpl.biceps_ex).click()
         self.find_element(hpl.add_exercise_button).click()
         self.scroll_the_page_to_the_bottom()
-        sleep(3)  # for demonstration purposes
 
     def check_that_selected_exercise_was_displayed(self):
-        return self.find_element(hpl.displayed_exercise_biceps).is_displayed()
+        wait = WebDriverWait(self.driver, 20)
+        wait.until(EC.visibility_of_element_located(hpl.displayed_exercise_biceps))
+        return True
 
     def add_an_exercise_approach(self):
         self.find_element(hpl.add_an_exercise_approach_btn).click()
@@ -63,14 +64,12 @@ class HomePage(BasePage):
         kg.send_keys('40')
         approach = self.find_element(hpl.approach_field)
         approach.send_keys('3')
-        sleep(3)  # for demonstration purposes
         self.find_element(hpl.next_btn).click()
         kg.clear()
         kg.send_keys('50')
         approach.clear()
         approach.send_keys('2')
         self.find_element(hpl.all_done_btn).click()
-        sleep(3)  # for demonstration purposes
         self.driver.execute_script('javascript:page_workout.save(2)')
 
     def check_that_an_exercise_approaches_were_added(self):
@@ -81,17 +80,18 @@ class HomePage(BasePage):
         record_btn = self.find_elements(hpl.rec_workout_3_december)
         record_btn[1].click()
         plus_btn = self.find_element(hpl.plus_workout_in_december).click()
+        wait = WebDriverWait(self.driver, 20)
+        wait.until(EC.visibility_of_element_located(hpl.exercise_selection_window))
         list_of_exercises = self.find_elements(hpl.list_of_exercises_in_the_selection_window)
         biceps_btn = list_of_exercises[2].click()
-        wait = WebDriverWait(self.driver, 40)
         wait.until(EC.text_to_be_present_in_element(hpl.biceps_ex, 'Сгибание рук со штангой'))
         self.find_element(hpl.biceps_ex).click()
         self.find_element(hpl.add_exercise_button).click()
-        sleep(3)  # for demonstration purposes
+        wait.until(EC.visibility_of_element_located(hpl.displayed_exercise_biceps))
         self.find_element(hpl.comment_to_the_exercise).click()
         self.find_element(hpl.comment_field).send_keys('Увеличить вес в следующий раз')
-        sleep(3)    # for demonstration purposes
         self.find_element(hpl.comment_done).click()
+        wait.until(EC.visibility_of_element_located(hpl.displayed_comment))
 
     def check_that_added_comment_was_displayed(self):
         return self.find_element(hpl.displayed_comment).is_displayed()
@@ -100,16 +100,16 @@ class HomePage(BasePage):
         record_btn = self.find_elements(hpl.rec_workout_4_december)
         record_btn[1].click()
         plus_btn = self.find_element(hpl.plus_workout_in_december).click()
+        wait = WebDriverWait(self.driver, 20)
+        wait.until(EC.visibility_of_element_located(hpl.exercise_selection_window))
         list_of_exercises = self.find_elements(hpl.list_of_exercises_in_the_selection_window)
         biceps_btn = list_of_exercises[2].click()
-        wait = WebDriverWait(self.driver, 40)
         wait.until(EC.text_to_be_present_in_element(hpl.biceps_ex, 'Сгибание рук со штангой'))
         self.find_element(hpl.biceps_ex).click()
         self.find_element(hpl.add_exercise_button).click()
-        sleep(3)  # for demonstration purposes
+        wait.until(EC.visibility_of_element_located(hpl.displayed_exercise_biceps))
         self.find_element(hpl.displayed_exercise_biceps).click()
-        sleep(3)  # for demonstration purposes
-        wait = WebDriverWait(self.driver, 40)
+        sleep(5)
         wait.until(EC.text_to_be_present_in_element(hpl.remove_an_exercise, 'Убрать упражнение из тренировки'))
         self.find_element(hpl.remove_an_exercise).click()
 
@@ -117,7 +117,8 @@ class HomePage(BasePage):
         try:
             self.find_element(hpl.displayed_exercise_biceps)
         except NoSuchElementException:
-            return True
+            return False
+        return True
 
     def go_to_the_catalog_of_exercises_page(self):
         catalog_of_exercises = self.find_elements(hpl.all_menu)
@@ -146,7 +147,8 @@ class HomePage(BasePage):
     def profile_dropdown_settings(self):
         profile = self.find_element(hpl.profile_block).click()
         menu_settings = self.find_element(hpl.profile_menu_settings).click()
-        sleep(3)  # for demonstration purposes
+        wait = WebDriverWait(self.driver, 20)
+        wait.until(EC.presence_of_element_located(hpl.profile_settings_title))
 
     def check_that_profile_settings_were_opened(self):
         settings_title = self.find_element(hpl.profile_settings_title).text
@@ -155,10 +157,15 @@ class HomePage(BasePage):
     def profile_dropdown_exit(self):
         profile = self.find_element(hpl.profile_block).click()
         menu_exit = self.find_element(hpl.profile_menu_exit).click()
-        sleep(3)  # for demonstration purposes
+        wait = WebDriverWait(self.driver, 20)
+        wait.until(EC.presence_of_element_located(hpl.login_button))
 
     def check_that_login_button_is_displayed(self):
         return self.find_element(hpl.login_button).is_displayed()
+
+
+
+
 
 
 
