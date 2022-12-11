@@ -6,7 +6,6 @@ from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
-from webdriver_manager.chrome import ChromeDriverManager
 
 
 login_button_home = (By.XPATH, '//a[@class="btn" and @style="font-size: 12px"]')
@@ -21,7 +20,7 @@ def driver():
     options.add_argument('--headless')
     file_path = os.path.join(os.path.dirname(__file__), 'info_session')
     options.add_argument(f'user-data-dir={file_path}')
-    chrome_driver = webdriver.Chrome(ChromeDriverManager().install(), options=options)
+    chrome_driver = webdriver.Chrome(options=options)
     chrome_driver.implicitly_wait(10)
     yield chrome_driver
     chrome_driver.quit()
