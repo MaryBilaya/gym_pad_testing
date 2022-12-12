@@ -3,7 +3,9 @@ import pytest
 import allure
 
 
+@allure.severity(allure.severity_level.NORMAL)
 @allure.feature('Exercises')
+@allure.story('Testing the exercises page')
 @pytest.mark.exercises
 def test_open_description_of_a_specific_exercise(driver, login):
     exercise_page = ExercisePage(driver)
@@ -12,7 +14,9 @@ def test_open_description_of_a_specific_exercise(driver, login):
     assert exercise_page.check_that_exercise_description_is_displayed()
 
 
+@allure.severity(allure.severity_level.NORMAL)
 @allure.feature('Exercises')
+@allure.story('Testing the exercises page')
 @pytest.mark.exercises
 def test_open_statistics_of_exercise(driver, login):
     exercise_page = ExercisePage(driver)
@@ -22,7 +26,9 @@ def test_open_statistics_of_exercise(driver, login):
     assert exercise_page.check_that_statistics_info_is_displayed()
 
 
+@allure.severity(allure.severity_level.NORMAL)
 @allure.feature('Exercises')
+@allure.story('Testing the exercises page')
 @pytest.mark.exercises
 def test_open_history_of_exercise(driver, login):
     exercise_page = ExercisePage(driver)
@@ -32,8 +38,9 @@ def test_open_history_of_exercise(driver, login):
     assert exercise_page.check_that_history_info_is_displayed()
 
 
+@allure.severity(allure.severity_level.NORMAL)
 @allure.feature('Exercises')
-# @pytest.mark.diploma
+@allure.story('Testing the exercises page')
 @pytest.mark.exercises
 def test_add_a_personal_exercise(driver, login):
     exercise_page = ExercisePage(driver)
@@ -42,7 +49,9 @@ def test_add_a_personal_exercise(driver, login):
     assert exercise_page.check_pop_up_message_that_a_personal_exercise_was_added()
 
 
+@allure.severity(allure.severity_level.NORMAL)
 @allure.feature('Exercises')
+@allure.story('Testing the exercises page')
 @pytest.mark.exercises
 def test_setting_a_personal_exercise(driver, login):
     exercise_page = ExercisePage(driver)
@@ -52,7 +61,9 @@ def test_setting_a_personal_exercise(driver, login):
     assert exercise_page.check_pop_up_message_that_a_personal_exercise_was_saved()
 
 
+@allure.severity(allure.severity_level.NORMAL)
 @allure.feature('Exercises')
+@allure.story('Testing the exercises page')
 @pytest.mark.exercises
 def test_delete_a_personal_exercise(driver, login):
     exercise_page = ExercisePage(driver)
@@ -62,7 +73,9 @@ def test_delete_a_personal_exercise(driver, login):
     assert exercise_page.check_that_a_personal_exercise_was_deleted()
 
 
+@allure.severity(allure.severity_level.NORMAL)
 @allure.feature('Exercises')
+@allure.story('Testing the exercises page')
 @pytest.mark.exercises
 def test_cancel_deletion_of_a_personal_exercise(driver, login):
     exercise_page = ExercisePage(driver)
@@ -72,7 +85,9 @@ def test_cancel_deletion_of_a_personal_exercise(driver, login):
     assert exercise_page.check_that_a_personal_exercise_still_displayed()
 
 
+@allure.severity(allure.severity_level.NORMAL)
 @allure.feature('Exercises')
+@allure.story('Testing the exercises page')
 @pytest.mark.exercises
 def test_make_a_positive_search_of_exercise(driver, login):
     exercise_page = ExercisePage(driver)
@@ -81,7 +96,9 @@ def test_make_a_positive_search_of_exercise(driver, login):
     assert exercise_page.check_positive_search_result()
 
 
+@allure.severity(allure.severity_level.NORMAL)
 @allure.feature('Exercises')
+@allure.story('Testing the exercises page')
 @pytest.mark.exercises
 def test_make_a_negative_search_of_exercise(driver, login):
     exercise_page = ExercisePage(driver)

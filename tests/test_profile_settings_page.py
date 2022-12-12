@@ -3,7 +3,9 @@ import pytest
 import allure
 
 
-@allure.feature('Profile_settings')
+@allure.severity(allure.severity_level.NORMAL)
+@allure.feature('Profile settings')
+@allure.story('Testing the profile settings page')
 @pytest.mark.profile_settings
 def test_the_correct_user_data_is_displayed(driver, login):
     profile_settings_page = ProfileSettings(driver)
@@ -13,7 +15,9 @@ def test_the_correct_user_data_is_displayed(driver, login):
     assert profile_settings_page.check_the_email_field_is_filled_in()
 
 
-@allure.feature('Profile_settings')
+@allure.severity(allure.severity_level.NORMAL)
+@allure.feature('Profile settings')
+@allure.story('Testing the profile settings page')
 @pytest.mark.profile_settings
 def test_add_additional_user_info(driver, login):
     profile_settings_page = ProfileSettings(driver)
@@ -23,7 +27,9 @@ def test_add_additional_user_info(driver, login):
     assert profile_settings_page.check_pop_up_message_that_user_info_was_saved()
 
 
-@allure.feature('Profile_settings')
+@allure.severity(allure.severity_level.NORMAL)
+@allure.feature('Profile settings')
+@allure.story('Testing the profile settings page')
 @pytest.mark.profile_settings
 def test_change_incorrect_password(driver, login):
     profile_settings_page = ProfileSettings(driver)
@@ -33,7 +39,9 @@ def test_change_incorrect_password(driver, login):
     assert profile_settings_page.check_pop_up_message_that_password_was_not_saved()
 
 
-@allure.feature('Profile_settings')
+@allure.severity(allure.severity_level.CRITICAL)
+@allure.feature('Profile settings')
+@allure.story('Testing the profile settings page')
 @pytest.mark.change_existing_password
 # @pytest.mark.skip('Run only at the end of testing')
 def test_change_existing_password(driver, login):

@@ -92,6 +92,7 @@ class HomePage(BasePage):
         self.find_element(hpl.comment_field).send_keys('Увеличить вес в следующий раз')
         self.find_element(hpl.comment_done).click()
         wait.until(EC.visibility_of_element_located(hpl.displayed_comment))
+        self.driver.execute_script('javascript:page_workout.save(3)')
 
     def check_that_added_comment_was_displayed(self):
         return self.find_element(hpl.displayed_comment).is_displayed()
@@ -103,18 +104,18 @@ class HomePage(BasePage):
         wait = WebDriverWait(self.driver, 20)
         wait.until(EC.visibility_of_element_located(hpl.exercise_selection_window))
         list_of_exercises = self.find_elements(hpl.list_of_exercises_in_the_selection_window)
-        biceps_btn = list_of_exercises[2].click()
-        wait.until(EC.text_to_be_present_in_element(hpl.biceps_ex, 'Сгибание рук со штангой'))
-        self.find_element(hpl.biceps_ex).click()
+        shoulders_btn = list_of_exercises[1].click()
+        wait.until(EC.text_to_be_present_in_element(hpl.shoulders_ex, 'Подъемы штанги вперед'))
+        self.find_element(hpl.shoulders_ex).click()
         self.find_element(hpl.add_exercise_button).click()
-        wait.until(EC.visibility_of_element_located(hpl.displayed_exercise_biceps))
-        self.find_element(hpl.displayed_exercise_biceps).click()
+        wait.until(EC.visibility_of_element_located(hpl.displayed_exercise_shoulders))
+        self.find_element(hpl.displayed_exercise_shoulders).click()
         wait.until(EC.element_to_be_clickable(hpl.remove_an_exercise))
         self.find_element(hpl.remove_an_exercise).click()
 
     def check_removal_of_exercise(self):
         try:
-            self.find_element(hpl.displayed_exercise_biceps).click()
+            self.find_element(hpl.displayed_exercise_shoulders).click()
         except NoSuchElementException:
             return True
 

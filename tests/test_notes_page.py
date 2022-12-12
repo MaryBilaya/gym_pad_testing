@@ -3,7 +3,9 @@ import allure
 import pytest
 
 
+@allure.severity(allure.severity_level.NORMAL)
 @allure.feature('Notes')
+@allure.story('Testing the notes page')
 @pytest.mark.notes
 def test_add_a_motivation_note(driver, login):
     notes_page = NotesPage(driver)
@@ -12,7 +14,9 @@ def test_add_a_motivation_note(driver, login):
     assert notes_page.check_that_a_motivation_note_was_added()
 
 
+@allure.severity(allure.severity_level.NORMAL)
 @allure.feature('Notes')
+@allure.story('Testing the notes page')
 @pytest.mark.notes
 def test_delete_a_motivation_note(driver, login):
     notes_page = NotesPage(driver)
@@ -23,7 +27,9 @@ def test_delete_a_motivation_note(driver, login):
     assert notes_page.check_that_a_motivation_note_was_deleted()
 
 
+@allure.severity(allure.severity_level.NORMAL)
 @allure.feature('Notes')
+@allure.story('Testing the notes page')
 @pytest.mark.notes
 def test_cancel_deleting_a_motivation_note(driver, login):
     notes_page = NotesPage(driver)
@@ -33,7 +39,9 @@ def test_cancel_deleting_a_motivation_note(driver, login):
     assert notes_page.check_that_a_motivation_note_was_not_deleted()
 
 
+@allure.severity(allure.severity_level.NORMAL)
 @allure.feature('Notes')
+@allure.story('Testing the notes page')
 @pytest.mark.notes
 def test_edit_a_motivation_note(driver, login):
     notes_page = NotesPage(driver)
@@ -43,7 +51,9 @@ def test_edit_a_motivation_note(driver, login):
     assert notes_page.check_that_changes_in_motivation_note_were_displayed()
 
 
+@allure.severity(allure.severity_level.NORMAL)
 @allure.feature('Notes')
+@allure.story('Testing the notes page')
 @pytest.mark.notes
 def test_change_font_to_bold_of_motivation_note_text(driver, login):
     notes_page = NotesPage(driver)
@@ -53,7 +63,9 @@ def test_change_font_to_bold_of_motivation_note_text(driver, login):
     assert notes_page.check_that_font_of_motivation_note_has_become_bold()
 
 
+@allure.severity(allure.severity_level.NORMAL)
 @allure.feature('Notes')
+@allure.story('Testing the notes page')
 @pytest.mark.notes
 def test_change_font_to_italic_of_motivation_note_text(driver, login):
     notes_page = NotesPage(driver)

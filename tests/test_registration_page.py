@@ -7,6 +7,7 @@ import allure
 
 @allure.severity(allure.severity_level.CRITICAL)
 @allure.feature('Registration')
+@allure.story('Testing the registration page')
 @pytest.mark.registration
 def test_with_correct_registration_data(driver):
     reg_page = RegistrationPage(driver)
@@ -19,7 +20,9 @@ def test_with_correct_registration_data(driver):
     assert home_page.check_that_username_is_displayed_in_the_welcome_block
 
 
+@allure.severity(allure.severity_level.CRITICAL)
 @allure.feature('Registration')
+@allure.story('Testing the registration page')
 @pytest.mark.registration
 def test_alert_message_after_registration_with_the_same_email(driver):
     reg_page = RegistrationPage(driver)

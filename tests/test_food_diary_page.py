@@ -9,9 +9,10 @@ CREDENTIALS = [
     {'product': 'Брокколи', 'choice': 4, 'weight': 170}]
 
 
+@allure.severity(allure.severity_level.NORMAL)
 @allure.feature('Nutrition')
+@allure.story('Testing the nutrition page')
 @pytest.mark.nutrition
-# @pytest.mark.diploma
 @pytest.mark.parametrize('creds', CREDENTIALS)
 def test_fill_in_a_food_diary(driver, login, creds):
     food_diary = FoodDiary(driver)
