@@ -11,6 +11,7 @@ CREDENTIALS = [
 
 @allure.feature('Nutrition')
 @pytest.mark.nutrition
+# @pytest.mark.diploma
 @pytest.mark.parametrize('creds', CREDENTIALS)
 def test_fill_in_a_food_diary(driver, login, creds):
     food_diary = FoodDiary(driver)

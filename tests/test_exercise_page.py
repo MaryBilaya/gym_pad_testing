@@ -33,6 +33,7 @@ def test_open_history_of_exercise(driver, login):
 
 
 @allure.feature('Exercises')
+# @pytest.mark.diploma
 @pytest.mark.exercises
 def test_add_a_personal_exercise(driver, login):
     exercise_page = ExercisePage(driver)

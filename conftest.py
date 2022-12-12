@@ -16,6 +16,8 @@ all_fields = (By.CLASS_NAME, 'form-control')
 @pytest.fixture(scope='function')
 def driver():
     options = Options()
+    options.add_argument('--no-sandbox')  # bypass OS security model
+    options.add_argument('--disable-dev-shm-usage')  # overcome limited resource problems
     options.add_argument('start-maximized')
     options.add_argument('--headless')
     file_path = os.path.join(os.path.dirname(__file__), 'info_session')
