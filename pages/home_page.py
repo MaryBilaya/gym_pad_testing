@@ -109,7 +109,7 @@ class HomePage(BasePage):
         self.find_element(hpl.add_exercise_button).click()
         wait.until(EC.visibility_of_element_located(hpl.displayed_exercise_biceps))
         self.find_element(hpl.displayed_exercise_biceps).click()
-        wait.until(EC.text_to_be_present_in_element(hpl.remove_an_exercise, 'Убрать упражнение из тренировки'))
+        wait.until(EC.element_to_be_clickable(hpl.remove_an_exercise))
         self.find_element(hpl.remove_an_exercise).click()
 
     def check_removal_of_exercise(self):
