@@ -1,4 +1,4 @@
-email = '00331312@mail.ru'
+email = '00421312@mail.ru'
 first_name = 'mary'
 last_name = 'bilaya'
 password = '123'
